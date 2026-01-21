@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Task Management API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .version {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 1s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li::before {
+            content: "✅";
+            font-size: 1.2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.05);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-secondary {
+            background: #2196F3;
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        .endpoints {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .endpoint-group {
+            margin-bottom: 30px;
+        }
+
+        .endpoint-group h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .endpoint {
+            background: #f8f9fa;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            font-family: 'Courier New', monospace;
+            transition: background 0.3s ease;
+        }
+
+        .endpoint:hover {
+            background: #e9ecef;
+        }
+
+        .status {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Task Management API</h1>
+            <p class="subtitle">API REST completa para gerenciamento de tarefas</p>
+            <span class="version">v2.0 • Production Ready</span>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>✅ Funcionalidades</h2>
+                <ul class="features">
+                    <li>Autenticação JWT com roles</li>
+                    <li>Gestão de Times e membros</li>
+                    <li>Gestão de Tarefas completa</li>
+                    <li>Histórico de alterações</li>
+                    <li>Validação de dados</li>
+                    <li>Containerização Docker</li>
+                    <li>Testes unitários</li>
+                    <li>Documentação completa</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🛠️ Tecnologias</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">Node.js</div>
+                    <div class="tech-item">TypeScript</div>
+                    <div class="tech-item">Express.js</div>
+                    <div class="tech-item">Prisma ORM</div>
+                    <div class="tech-item">SQLite</div>
+                    <div class="tech-item">JWT</div>
+                    <div class="tech-item">bcrypt</div>
+                    <div class="tech-item">Docker</div>
+                    <div class="tech-item">Jest</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Como Executar</h2>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>Com Docker:</strong><br>
+                    <code>docker-compose up -d</code>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>Manual:</strong><br>
+                    <code>npm install<br>npm run dev</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="https://github.com/andreamorim18/task_management_db" class="btn btn-primary">
+                📚 Ver no GitHub
+            </a>
+            <a href="http://localhost:3333" class="btn btn-secondary">
+                🌐 API Local
+            </a>
+        </div>
+
+        <div class="endpoints">
+            <h2>📡 Endpoints Disponíveis</h2>
+            
+            <div class="endpoint-group">
+                <h3>🔐 Autenticação</h3>
+                <div class="endpoint">POST /api/auth/register - Criar usuário</div>
+                <div class="endpoint">POST /api/auth/login - Login com JWT</div>
+                <div class="endpoint">GET /api/auth/profile - Perfil do usuário</div>
+            </div>
+
+            <div class="endpoint-group">
+                <h3>👥 Times</h3>
+                <div class="endpoint">GET /api/teams - Listar times</div>
+                <div class="endpoint">POST /api/teams - Criar time (admin)</div>
+                <div class="endpoint">POST /api/teams/:id/members - Adicionar membro</div>
+            </div>
+
+            <div class="endpoint-group">
+                <h3>📋 Tarefas</h3>
+                <div class="endpoint">GET /api/tasks - Listar tarefas</div>
+                <div class="endpoint">POST /api/tasks - Criar tarefa</div>
+                <div class="endpoint">GET /api/tasks/my-tasks - Minhas tarefas</div>
+                <div class="endpoint">PUT /api/tasks/:id - Atualizar tarefa</div>
+            </div>
+        </div>
+
+        <div class="status">
+            <h2><span class="status-indicator"></span>Status da API</h2>
+            <p><strong>Local:</strong> <a href="http://localhost:3333" style="color: #4CAF50;">http://localhost:3333</a></p>
+            <p><strong>GitHub Pages:</strong> <a href="https://andreamorim18.github.io/task_management_db/" style="color: #2196F3;">Online</a></p>
+            <p><strong>Repositório:</strong> <a href="https://github.com/andreamorim18/task_management_db" style="color: #667eea;">GitHub</a></p>
+        </div>
+
+        <footer>
+            <p>🏆 Projeto 100% completo e profissional!</p>
+            <p>Desenvolvido com ❤️ por Andre Morim</p>
+            <p>MIT License • 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
