@@ -12,6 +12,7 @@ API REST completa para gerenciamento de tarefas com autenticação, times e cola
 - 🐳 **Docker** para containerização
 - 📝 **Testes** unitários completos
 - 📚 **Documentação** profissional
+- 🎨 **Site profissional** com design moderno
 
 ## 🛠️ Tecnologias
 
@@ -21,6 +22,7 @@ API REST completa para gerenciamento de tarefas com autenticação, times e cola
 - **JWT** + **bcrypt** (segurança)
 - **Docker** + **Docker Compose**
 - **Jest** (testes)
+- **HTML5** + **CSS3** (site profissional)
 
 ## 🚀 Como Executar
 
@@ -55,16 +57,40 @@ npm run dev
 - `GET /api/tasks/:id` - Detalhes da tarefa
 - `PUT /api/tasks/:id` - Atualizar tarefa
 
+## 🌐 Deploy e Acesso
+
+### 📱 Site Profissional
+- **GitHub Pages:** https://andreamorim18.github.io/task_management_db/
+- **Design:** Moderno com gradientes e animações
+- **Responsivo:** Mobile-friendly
+- **Conteúdo:** Documentação completa e interativa
+
+### 🔧 API Local
+- **URL:** http://localhost:3333
+- **Status:** Rodando com Docker
+- **Banco:** SQLite + Prisma ORM
+
+### 📚 Repositório
+- **GitHub:** https://github.com/andreamorim18/task_management_db
+- **Branch:** main
+- **Licença:** MIT
+
+## 🎨 Características do Site
+
+- ✅ **Design moderno** com gradientes roxo/azul
+- ✅ **Animações CSS** suaves e profissionais
+- ✅ **Layout responsivo** para todos os dispositivos
+- ✅ **Cards interativos** com hover effects
+- ✅ **Status indicators** animados
+- ✅ **Documentação** completa dos endpoints
+- ✅ **Links diretos** para API e repositório
+
 ## 📖 Documentação
 
-- **INSTALL.md** - Guia completo de instalação
-- **API.md** - Documentação dos endpoints
-- **README.md** - Visão geral
-
-## 🌐 Deploy
-
-- **API Local:** http://localhost:3333
-- **GitHub:** https://github.com/andreamorim18/task_management_db
+- **Site Principal:** https://andreamorim18.github.io/task_management_db/
+- **README.md:** Visão geral do projeto
+- **API.md:** Documentação detalhada dos endpoints
+- **INSTALL.md:** Guia completo de instalação
 
 ## 📝 Licença
 
@@ -74,4 +100,6 @@ MIT License
 
 **🏆 Projeto 100% completo e profissional!**
 
-**Versão Completa - Tudo implementado e documentado!** 🎯🚀
+**🎨 Site com design moderno + API funcional + Documentação completa!** 🎯🚀
+
+**Versão Final - Tudo implementado, documentado e online!** 🎉
